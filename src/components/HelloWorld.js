@@ -1,5 +1,5 @@
 import { defineComponent, h } from 'vue';
-import * as SubHelloWorld from './SubHelloWorld.js';
+import { vueComponent as SubHelloWorld } from './SubHelloWorld.js';
 
 export const vueComponent = defineComponent({
   components: { SubHelloWorld },

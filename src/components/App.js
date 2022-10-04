@@ -1,5 +1,5 @@
 import { defineComponent, h } from 'vue';
-import * as HelloWorld from './HelloWorld.js';
+import { vueComponent as HelloWorld } from './HelloWorld.js';
 
 export const vueComponent = defineComponent({
   components: { HelloWorld },

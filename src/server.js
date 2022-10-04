@@ -5,38 +5,20 @@ import * as Path from 'path';
 
 const server = Http.createServer()
   .on('request', async (req, res) => {
-    // Try to set the content-type header.
-    switch (Path.extname(req.url ?? '')) {
-      case '.json':
-        res.setHeader('Content-Type', 'application/json; charset=utf-8');
-        break;
-      case '.html':
-        res.setHeader('Content-Type', 'text/html; charset=utf-8');
-        break;
-      case '.css':
-        res.setHeader('Content-Type', 'text/css; charset=utf-8');
-        break;
-      case '.js':
-        res.setHeader('Content-Type', 'application/javascript; charset=utf-8');
-        break;
-      case '.svg':
-        res.setHeader('Content-Type', 'image/svg+xml; charset=utf-8');
-        break;
-    }
-
+    let html = '';
     const app = createApp();
-
     try {
-      const ssrResult = await renderToString(app);
-      if (!ssrResult) {
-        console.error('Failed SSR');
+      html = await renderToString(app);
+      if (!html) {
+        throw 'Failed SSR';
       }
     } catch (e) {
+      html = 'Error';
       console.error('Failed SSR', e);
     }
     res.setHeader('Content-Type', 'text/html; charset=utf-8');
     res.end(`
-    !DOCTYPE html>
+    <!DOCTYPE html>
     <html lang="en">
       <head>
         <meta charset="utf-8">
@@ -58,7 +40,7 @@ const server = Http.createServer()
         <noscript>
           <strong>We're sorry but Vue App doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
         </noscript>
-        <div id="app">${ssrResult}</div>
+        <div id="app">${html}</div>
       </body>
     </html>
     `);
