@@ -1,0 +1,30 @@
+{
+  "name": "sb-vue",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve:universal": "node ./src/server.js",
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "test": "vitest run",
+    "test:ui": "vitest --ui"
+  },
+  "dependencies": {
+    "@vue/server-renderer": "3.2.39",
+    "vue": "3.2.39"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-eslint": "^4.4.0",
+    "@vue/cli-service": "^4.4.0",
+    "@vue/test-utils": "2.0.2",
+    "eslint": "^6.7.2",
+    "eslint-plugin-vue": "^9.6.0",
+    "jsdom": "20.0.0",
+    "vitest": "0.23.4"
+  },
+  "stackblitz": {
+    "startCommand": "npm install & npm run test"
+  },
+  "type": "module"
+}
