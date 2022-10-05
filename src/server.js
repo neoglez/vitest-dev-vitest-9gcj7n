@@ -7,8 +7,8 @@ import * as url from 'url';
 
 const server = Http.createServer()
   .on('request', async (req, res) => {
-    let html = '';
-      // parse URL
+  let html = '';
+  // parse URL
   const parsedUrl = url.parse(req.url);
   // extract URL path
   let pathname = `.${parsedUrl.pathname}`;
@@ -29,6 +29,7 @@ const server = Http.createServer()
     '.pdf': 'application/pdf',
     '.doc': 'application/msword'
   };
+  console.log('pathname follows');
   console.log(pathname);
 
     fs.access(pathname, function (exist) {
@@ -38,9 +39,6 @@ const server = Http.createServer()
         res.end(`File ${pathname} not found!`);
         return;
       }
-
-      // if is a directory search for index file matching the extension
-      //if (fs.statSync(pathname).isDirectory()) pathname += '/index' + ext;
 
       // read file from file system
       fs.readFile(pathname, function(err, data){
@@ -65,8 +63,6 @@ const server = Http.createServer()
       html = 'Error';
       console.error('Failed SSR', e);
     }
-
-    if (req.url == 'css/inde.')
 
     res.end(`
     <!DOCTYPE html>
@@ -96,6 +92,6 @@ const server = Http.createServer()
     </html>
     `);
   })
-  .listen(3000, undefined, () => {
+  .listen(3000, 'localhost', () => {
     console.log(`Server running on ${JSON.stringify(server.address())}`);
   });

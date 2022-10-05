@@ -11,10 +11,25 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}/src/server.js",
-            "outFiles": [
-                "${workspaceFolder}/**/*.js"
+            "stopOnEntry": true,
+            "runtimeArgs": ["run-script", "serve:universal"]
+        },
+        {
+            "name": "Launch localhost",
+            "type": "firefox",
+            "request": "launch",
+            "firefoxExecutable": "/usr/bin/firefox",
+            "webRoot": "${workspaceFolder}",
+            "url": "http://0.0.0.0:3000/",
+            "skipFiles": [
+                "${workspaceFolder}/node_modules/**"
             ]
-        }
+        },
+        {
+            "name": "Attach to Process",
+            "type": "node",
+            "request": "attach",
+            "processId": "${command:PickProcess}"
+          }     
     ]
 }
